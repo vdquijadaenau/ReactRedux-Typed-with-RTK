@@ -1,5 +1,3 @@
-import { ITodoType } from "../Todo/Todo";
+import { TodoType } from "../Todo/Todo";
 
-export interface IList {
-  todo: ITodoType[];
-}
+export type List = [TodoType];

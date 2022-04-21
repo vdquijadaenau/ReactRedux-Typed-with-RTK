@@ -1,2 +1,6 @@
-export * from "./Todo";
-// export *'./todos-data'
+export type TodoType = {
+  id: number;
+  text: string;
+  completed: boolean;
+  color: string;
+};

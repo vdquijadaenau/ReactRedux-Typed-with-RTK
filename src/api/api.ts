@@ -13,65 +13,6 @@
 // import seedrandom from "seedrandom";
 // import { SerializerInterface } from "miragejs/serializer";
 
-// export interface TodoType {
-//   id: number;
-//   text: string;
-//   completed: boolean;
-//   color: string;
-// }
-
-// const IdSerializer:SerializerInterface = RestSerializer.extend({
-//   serializeIds: "always",
-// });
-
-// // Set up a seeded random number generator, so that we get
-// // a consistent set of users / entries each time the page loads.
-// // This can be reset by deleting this localStorage value,
-// // or turned off by setting `useSeededRNG` to false.
-// let useSeededRNG = false;
-
-// let rng = seedrandom();
-
-// if (useSeededRNG) {
-//   let randomSeedString = localStorage.getItem("randomTimestampSeed");
-//   let seedDate;
-
-//   if (randomSeedString) {
-//     seedDate = new Date(randomSeedString);
-//   } else {
-//     seedDate = new Date();
-//     randomSeedString = seedDate.toISOString();
-//     localStorage.setItem("randomTimestampSeed", randomSeedString);
-//   }
-
-//   rng = seedrandom(randomSeedString);
-//   faker.seed(seedDate.getTime());
-// }
-
-// function getRandomInt(min: number, max: number) {
-//   min = Math.ceil(min);
-//   max = Math.floor(max);
-//   return Math.floor(rng() * (max - min + 1)) + min;
-// }
-
-// const randomFromArray = (array: any) => {
-//   const index = getRandomInt(0, array.length - 1);
-//   return array[index];
-// };
-
-// const todoTemplates = [
-//   { base: "Buy $THING", values: ["milk", "bread", "cheese", "toys"] },
-//   { base: "Clean $THING", values: ["house", "yard", "bedroom", "car"] },
-//   { base: "Read $THING", values: ["newspaper", "book", "email"] },
-// ];
-
-// const generateTodoText = () => {
-//   const template = randomFromArray(todoTemplates);
-//   const value = randomFromArray(template.values);
-//   const text = template.base.replace("$THING", value);
-//   return text;
-// };
-
 // new Server({
 //   routes() {
 //     this.namespace = "fakeApi";
@@ -140,20 +81,21 @@
 //   },
 // });
 
-import { createServer, hasMany, Model } from "miragejs";
+import { belongsTo, createServer, hasMany, Model } from "miragejs";
 import { todoFactory } from "./factories";
-import { IList, ITodoType } from "./models";
+import { List, TodoType } from "./models";
+import { getTodosRoutes, postTodosRoutes } from "./routes";
 
 export default function MakeServer() {
   const server = createServer({
     models: {
-      todo: Model.extend<Partial<ITodoType>>({}),
-      list: Model.extend({
-        todo: hasMany(),
-      }),
+      todo: Model.extend<Partial<TodoType>>({}),
     },
     factories: {
       todo: todoFactory,
+    },
+    routes() {
+      getTodosRoutes(this);
     },
   });
 

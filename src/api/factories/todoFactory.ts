@@ -1,7 +1,7 @@
 import seedrandom from "seedrandom";
-import { ITodoType } from "../models";
 import faker from "@faker-js/faker";
 import { Factory } from "miragejs";
+import { TodoType } from "../models";
 
 let useSeededRNG = false;
 
@@ -40,14 +40,14 @@ const todoTemplates = [
   { base: "Read $THING", values: ["newspaper", "book", "email"] },
 ];
 
-const generateTodoText = () => {
+const generateTodoText = (): string => {
   const template = randomFromArray(todoTemplates);
   const value = randomFromArray(template.values);
   const text = template.base.replace("$THING", value);
   return text;
 };
 
-export const todoFactory = Factory.extend({
+export const todoFactory = Factory.extend<Partial<TodoType>>({
   id(index: number): number {
     return Number(index);
   },

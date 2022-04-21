@@ -1,7 +1,7 @@
 // A tiny wrapper around fetch(), borrowed from
 // https://kentcdodds.com/blog/replace-axios-with-a-simple-custom-fetch-wrapper
 
-import { TodoType } from "../server";
+// import { TodoType } from "../server";
 
 type ConfigType = {
   headers?: any;
