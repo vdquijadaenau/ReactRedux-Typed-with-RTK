@@ -83,13 +83,15 @@
 
 import { belongsTo, createServer, hasMany, Model } from "miragejs";
 import { todoFactory } from "./factories";
-import { List, TodoType } from "./models";
+import { ListModel, TodoModel } from "./models";
 import { getTodosRoutes, postTodosRoutes } from "./routes";
 
 export default function MakeServer() {
   const server = createServer({
+    logging: true,
     models: {
-      todo: Model.extend<Partial<TodoType>>({}),
+      todo: TodoModel,
+      list: ListModel,
     },
     factories: {
       todo: todoFactory,
