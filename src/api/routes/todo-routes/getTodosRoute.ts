@@ -1,9 +1,9 @@
 import { Request, Server } from "miragejs";
-import { AppSchema } from "../../schema";
+import { AppSchema } from "../../models";
 
 export function getTodosRoutes(context: Server) {
   return [
-    context.get("/todos", (schema: AppSchema) => {
+    context.get("/todo", (schema: AppSchema) => {
       return schema.all("todo");
     }),
     context.get("/todo/:id", function (schema: AppSchema, request: Request) {

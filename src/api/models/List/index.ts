@@ -4,4 +4,4 @@ import { TodoType } from "../Todo";
 
 export type List = [TodoType];
 
-export const ListModel: ModelDefinition = Model.extend([]);
+export const ListModel: ModelDefinition = Model.extend({});

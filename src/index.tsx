@@ -3,7 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 
-import "./api/api";
+import { MakeServer } from "./api";
+
+const environment = process.env.NODE_ENV;
+
+if (environment !== "production") {
+  MakeServer({ environment });
+}
 
 ReactDOM.render(
   <React.StrictMode>
